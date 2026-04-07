@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LeRaconteur</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <h1>LeRaconteur</h1>
+        <p>
+          Crée ton prompt d'histoire en moins d'une minute, puis colle-le dans ton
+          IA préférée.
+        </p>
+      </header>
+
+      <section class="card">
+        <form id="story-form" novalidate>
+          <div id="fields" class="fields"></div>
+          <button type="submit" class="btn btn-primary">Generer mon prompt</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="result-header">
+          <h2>Prompt prêt à copier</h2>
+          <button id="copy-btn" type="button" class="btn btn-copy">Copier</button>
+        </div>
+        <textarea
+          id="prompt-output"
+          readonly
+          rows="18"
+          aria-label="Prompt généré"
+          placeholder="Ton prompt apparaîtra ici..."
+        ></textarea>
+        <p id="status" class="status" aria-live="polite"></p>
+      </section>
+    </main>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

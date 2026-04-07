@@ -1,0 +1,3 @@
+- Utilise un theme clair par défaut (pas de thème sombre)
+- Traduis en français et détaille tous les items des drop-downs
+- Change la "Longueur de lecture" (10, 15, 20 minutes) par 500, 1000, 2000 mots
