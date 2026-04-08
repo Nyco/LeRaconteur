@@ -18,8 +18,24 @@
 
       <section class="card">
         <form id="story-form" novalidate>
-          <div id="fields" class="fields"></div>
-          <button type="submit" class="btn btn-primary">Generer mon prompt</button>
+          <div class="form-sections">
+            <section class="form-section">
+              <h2>Mes préférences</h2>
+              <div id="preferences-fields" class="fields"></div>
+            </section>
+
+            <section class="form-section">
+              <h2>Cadre de l'histoire</h2>
+              <div id="setup-fields" class="fields"></div>
+            </section>
+
+            <section class="form-section">
+              <h2>Personnages</h2>
+              <div id="characters-fields" class="fields"></div>
+              <div id="characters-editor" class="characters-editor"></div>
+            </section>
+          </div>
+          <button type="submit" class="btn btn-primary">Générer mon prompt</button>
         </form>
       </section>
 

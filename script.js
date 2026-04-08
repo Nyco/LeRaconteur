@@ -1,194 +1,173 @@
-const STORAGE_KEY = "leraconteur.v1";
+const STORAGE_KEY = "leraconteur.v1.3";
 
 const FIELD_CONFIG = [
   {
     id: "age",
-    label: "Age de l'enfant",
+    group: "preferences",
+    label: "Âge de l'enfant",
     options: [
-      {
-        label: "6 ans CP",
-        explain: "Ideal pour des phrases courtes, beaucoup d'action et un vocabulaire simple.",
-      },
-      {
-        label: "7-8 CE1/CE2",
-        explain: "Bon equilibre entre aventure, emotions et petites reflexions.",
-      },
-      {
-        label: "9-10 CM1/CM2",
-        explain: "Permet une intrigue un peu plus riche avec davantage de nuances.",
-      },
+      { label: "6 ans (CP)", explain: "Idéal pour des phrases courtes, de l'action et des mots très simples." },
+      { label: "7-8 ans (CE1/CE2)", explain: "Bon équilibre entre aventure, émotions et réflexion légère." },
+      { label: "9-10 ans (CM1/CM2)", explain: "Permet une intrigue plus riche avec davantage de nuances." },
     ],
   },
   {
-    id: "duree",
-    label: "Longueur du recit",
+    id: "longueur",
+    group: "preferences",
+    label: "Longueur du récit",
     options: [
-      { label: "500 mots", explain: "Format court, parfait pour lire vite avec beaucoup de rythme." },
-      { label: "1000 mots", explain: "Format moyen, ideal pour une aventure bien developpee." },
-      { label: "2000 mots", explain: "Format long, pour une histoire plus detaillee et immersive." },
+      { label: "500 mots", explain: "Format court, dynamique et facile à lire d'une traite." },
+      { label: "1000 mots", explain: "Format moyen, idéal pour une aventure bien développée." },
+      { label: "2000 mots", explain: "Format long, plus immersif et détaillé." },
     ],
   },
   {
     id: "style",
-    label: "Style d'ecriture",
+    group: "setup",
+    label: "Style d'écriture",
     options: [
-      { label: "Actif et percutant", explain: "Des phrases courtes qui vont droit au but et avancent vite." },
-      { label: "Hybride visuel", explain: "Un style qui donne l'impression de voir les scenes comme en BD." },
-      { label: "Documentaire petillant", explain: "Un ton vivant qui melange aventure et infos utiles." },
-      { label: "Descriptif immersif", explain: "Des descriptions riches pour sentir les lieux et les emotions." },
+      { label: "Actif et percutant", explain: "Des phrases courtes qui vont droit au but." },
+      { label: "Hybride visuel", explain: "Un style très imagé, comme un récit presque dessiné." },
+      { label: "Documentaire pétillant", explain: "Un ton vivant qui glisse des infos utiles dans l'aventure." },
+      { label: "Descriptif immersif", explain: "Des descriptions riches pour ressentir les lieux et les émotions." },
     ],
   },
   {
-    id: "univers",
-    label: "Monde / decor",
+    id: "monde",
+    group: "setup",
+    label: "Monde / décor",
     options: [
-      {
-        label: "Monde cache en pleine vue",
-        explain: "Un monde secret existe juste a cote du quotidien sans que les adultes voient tout.",
-      },
-      {
-        label: "Nature sauvage a hauts enjeux",
-        explain: "La nature devient un terrain d'aventure avec de vrais enjeux.",
-      },
-      {
-        label: "Ecole ou colonie amelioree",
-        explain: "L'ecole ou le camp cache des regles et opportunites extraordinaires.",
-      },
-      {
-        label: "Univers fantaisiste casse-regles",
-        explain: "Un univers joyeusement absurde ou les regles classiques n'existent plus.",
-      },
-      {
-        label: "Cadre doux et nostalgique",
-        explain: "Un cadre doux et reconfortant qui donne envie d'y rester longtemps.",
-      },
-    ],
-  },
-  {
-    id: "hero",
-    label: "Heros",
-    options: [
-      { label: "Le penseur malin", explain: "Un heros qui gagne surtout grace a ses idees et sa logique." },
-      { label: "Le trouble-fete joueur", explain: "Un heros farceur qui ose sortir des sentiers battus." },
-      { label: "Le reveur timide", explain: "Un heros discret qui avance grace a son imagination." },
-      { label: "Le brave aventurier", explain: "Un heros qui agit avec courage meme quand c'est difficile." },
-      { label: "L'explorateur curieux", explain: "Un heros qui progresse en observant, testant et posant des questions." },
-      {
-        label: "Le brave aventurier + le penseur malin",
-        explain: "Duo muscle et cerveau pour agir vite et reflechir juste.",
-      },
-      {
-        label: "Le trouble-fete joueur + le reveur timide",
-        explain: "Duo contraste entre audace et sensibilite pour avancer ensemble.",
-      },
-    ],
-  },
-  {
-    id: "allie",
-    label: "Allie (meilleur ami)",
-    options: [
-      { label: "L'allie du quotidien", explain: "Un ami tres relatable, simple et attachant." },
-      { label: "L'allie protecteur", explain: "Un ami loyal qui protege dans les moments tendus." },
-      { label: "Le clown de service", explain: "Un ami drole qui detend l'atmosphere quand le stress monte." },
-      { label: "Le farceur piquant", explain: "Un ami vif qui lance des repliques ironiques et amusantes." },
-      { label: "L'allie specialiste", explain: "Un ami expert qui apporte une competence cle au bon moment." },
-    ],
-  },
-  {
-    id: "defi",
-    label: "Defi principal",
-    options: [
-      {
-        label: "Les adultes ne me croient pas",
-        explain: "Le heros dit la verite mais personne ne le croit au debut.",
-      },
-      { label: "Enigme logique ou porte verrouillee", explain: "Il faut resoudre un probleme malin pour avancer." },
-      { label: "Mission sauver le plus petit", explain: "Quelqu'un de vulnerable doit etre aide avant qu'il ne soit trop tard." },
-      { label: "Vaincre la peur interieure", explain: "Le heros doit depasser son doute et ses jambes qui tremblent." },
-      { label: "Rivalite a forts enjeux", explain: "Une competition serieuse oblige le heros a donner le meilleur de lui-meme." },
-    ],
-  },
-  {
-    id: "mentor",
-    label: "Mentor",
-    options: [
-      { label: "Animal sage et piquant", explain: "Un animal malin donne des conseils utiles avec un peu d'humour." },
-      { label: "Objet parlant expert", explain: "Un objet qui parle apporte un savoir tres precis." },
-      { label: "Grand ami inspirant", explain: "Un plus grand ami aide sans juger ni faire la morale." },
-      { label: "Creature magique", explain: "Une creature incroyable ouvre la porte a l'etonnement." },
-      { label: "Pas de mentor", explain: "Le heros avance seul et decouvre ses ressources interieures." },
-    ],
-  },
-  {
-    id: "fun",
-    label: "Element fun",
-    options: [
-      { label: "Chaos inattendu", explain: "Un evenement imprévu chamboule tout de facon amusante." },
-      { label: "Magie joueuse", explain: "Une magie malicieuse provoque des surprises droles." },
-      { label: "Personnage loufoque", explain: "Un personnage farfelu apporte un vrai souffle comique." },
-      { label: "Malentendus hilarants", explain: "Des confusions droles entrainent des situations inattendues." },
-      { label: "Aucun", explain: "Le ton reste plus sobre, avec seulement de petites touches d'humour." },
+      { label: "Monde caché en pleine vue", explain: "Un monde secret existe juste à côté du quotidien." },
+      { label: "Nature sauvage à forts enjeux", explain: "La nature devient un terrain d'aventure exigeant." },
+      { label: "École ou colonie augmentée", explain: "L'école ou la colo cache des règles extraordinaires." },
+      { label: "Univers fantaisiste casse-règles", explain: "Un monde joyeusement imprévisible où tout peut arriver." },
+      { label: "Cadre doux et nostalgique", explain: "Une ambiance cocon, rassurante et chaleureuse." },
     ],
   },
   {
     id: "theme",
-    label: "Theme de transformation",
+    group: "setup",
+    label: "Thème de transformation",
     options: [
-      { label: "Amitie", explain: "L'histoire montre la force des liens, de l'entraide et du groupe." },
-      { label: "Confiance en soi", explain: "Le heros apprend a croire en sa voix et en ses capacites." },
-      { label: "Courage", explain: "Le heros agit meme quand il ressent de la peur." },
-      { label: "Persistance", explain: "Le heros continue malgre les erreurs et les obstacles." },
-      { label: "Justice et equite", explain: "Le heros defend ce qui est juste pour lui et pour les autres." },
+      { label: "Amitié", explain: "L'histoire montre la force des liens et de l'entraide." },
+      { label: "Confiance en soi", explain: "Le héros apprend à croire en sa voix et ses capacités." },
+      { label: "Courage", explain: "Le héros agit même quand il a peur." },
+      { label: "Persistance", explain: "Le héros continue malgré les erreurs et les obstacles." },
+      { label: "Justice et équité", explain: "Le héros défend ce qui est juste pour tous." },
     ],
   },
   {
-    id: "fin",
+    id: "ton",
+    group: "setup",
     label: "Ton de fin",
     options: [
-      { label: "Fierte et empowerment", explain: "La fin donne de la fierte et l'envie d'oser encore." },
-      { label: "Calme et securisante", explain: "La fin rassure avec un retour doux et stable." },
-      { label: "Mystere qui dure", explain: "La fin laisse planer une petite merveille a imaginer." },
-      { label: "Sourire final", explain: "La fin se termine sur une touche drole et legere." },
-      { label: "Cercle d'amis", explain: "La fin souligne l'importance du groupe et de l'entraide." },
-      { label: "Optimisme et confiance", explain: "La fin ouvre la suite avec energie positive." },
-      { label: "Resilience face a l'adversite", explain: "La fin montre qu'on peut tomber puis se relever plus fort." },
-      { label: "Apprentissage sans fin", explain: "La fin celebre la curiosite continue et l'envie de progresser." },
+      { label: "Fière et motivante", explain: "La fin donne de la fierté et l'envie d'oser." },
+      { label: "Calme et rassurante", explain: "La fin offre un retour doux et sécurisant." },
+      { label: "Mystère persistant", explain: "La fin laisse une pointe de magie à imaginer." },
+      { label: "Sourire final", explain: "La fin se ferme avec une touche drôle et légère." },
+      { label: "Cercle d'amis", explain: "La fin valorise le groupe et l'entraide." },
+      { label: "Optimisme et confiance", explain: "La fin ouvre l'avenir avec une énergie positive." },
+      { label: "Résilience face à l'adversité", explain: "La fin montre qu'on peut se relever plus fort." },
+      { label: "Apprentissage continu", explain: "La fin célèbre la curiosité et le progrès." },
+    ],
+  },
+  {
+    id: "hero",
+    group: "characters",
+    label: "Type de héros",
+    options: [
+      { label: "Le penseur malin", explain: "Il gagne surtout grâce à ses idées et sa logique." },
+      { label: "Le trouble-fête joueur", explain: "Il ose sortir des sentiers battus." },
+      { label: "Le rêveur timide", explain: "Il avance grâce à son imagination." },
+      { label: "Le brave aventurier", explain: "Il agit avec courage même dans l'inconnu." },
+      { label: "L'explorateur curieux", explain: "Il progresse en observant et en expérimentant." },
+    ],
+  },
+  {
+    id: "allie",
+    group: "characters",
+    label: "Type d'allié",
+    options: [
+      { label: "L'allié du quotidien", explain: "Un ami très proche dans lequel on se reconnaît." },
+      { label: "L'allié protecteur", explain: "Un ami loyal qui protège quand ça se complique." },
+      { label: "Le clown de service", explain: "Un ami drôle qui détend l'atmosphère." },
+      { label: "Le farceur piquant", explain: "Un ami vif, ironique et amusant." },
+      { label: "L'allié spécialiste", explain: "Un ami expert d'une compétence clé." },
+    ],
+  },
+  {
+    id: "mentor",
+    group: "characters",
+    label: "Type de mentor",
+    options: [
+      { label: "Animal sage et piquant", explain: "Un animal malin donne des conseils utiles." },
+      { label: "Objet parlant expert", explain: "Un objet vivant partage un savoir précis." },
+      { label: "Grand ami inspirant", explain: "Un plus grand aide sans moraliser." },
+      { label: "Créature magique", explain: "Une présence merveilleuse ouvre l'imaginaire." },
+      { label: "Pas de mentor", explain: "Le héros avance seul et puise en lui-même." },
+    ],
+  },
+  {
+    id: "trickster",
+    group: "characters",
+    label: "Type de trickster",
+    options: [
+      { label: "Chaos inattendu", explain: "Il déclenche des événements surprenants et drôles." },
+      { label: "Magie joueuse", explain: "Il crée des surprises ludiques et imprévisibles." },
+      { label: "Personnage loufoque", explain: "Il apporte un vrai souffle comique." },
+      { label: "Malentendus hilarants", explain: "Il provoque des quiproquos amusants." },
+      { label: "Aucun trickster", explain: "L'histoire garde un ton plus sobre." },
+    ],
+  },
+  {
+    id: "opposant",
+    group: "characters",
+    label: "Type d'opposant",
+    options: [
+      { label: "Le rival ambitieux", explain: "Il veut gagner à tout prix, même injustement." },
+      { label: "Le gardien des règles", explain: "Il bloque le héros au nom de règles trop rigides." },
+      { label: "Le manipulateur charmeur", explain: "Il séduit pour mieux tromper." },
+      { label: "La force incontrôlable", explain: "Il représente un danger puissant et difficile à prévoir." },
+      { label: "L'ombre intérieure", explain: "L'opposant principal est la peur ou le doute du héros." },
     ],
   },
 ];
 
-const VOGler_STRUCTURE = [
-  "Acte 1 - Installation: Monde ordinaire, appel de l'aventure, refus, rencontre du mentor, passage du premier seuil.",
-  "Acte 2 - Transformation: Epreuves/allies/ennemis, approche de la caverne, ordalie, recompense, chemin du retour.",
-  "Acte 3 - Resolution: Resurrection, retour avec l'elixir.",
+const TASTE_FIELDS = [
+  {
+    id: "ceQueJaimerais",
+    label: "Ce que j'aimerais",
+    placeholder: "Exemple: une quête dans la forêt, une énigme, un dragon gentil, beaucoup d'amitié.",
+  },
+  {
+    id: "ceQueJeVeuxEviter",
+    label: "Ce que je veux éviter",
+    placeholder: "Exemple: trop de disputes, des scènes effrayantes, des histoires tristes.",
+  },
 ];
 
-const BEST_PRACTICES = [
-  "Utilise la structure comme outil de diagnostic, pas comme formule rigide.",
-  "Priorise la transformation interne du heros, pas seulement les evenements.",
-  "Chaque etape doit provoquer un vrai glissement emotionnel.",
-  "Renforce l'Ordalie: perte, crise identitaire ou peur maximale.",
-  "Fais monter les enjeux en continu jusqu'a la Resurrection.",
-  "Fais miroir entre voyage externe et evolution interne.",
-  "Utilise les personnages comme fonctions narratives claires.",
-  "Soigne le retour final avec une valeur transmise au lecteur.",
-  "Tu peux compresser ou fusionner des etapes, tout en gardant l'arc.",
-  "Fais ressentir peur, soulagement et closure de facon nette.",
+const CHARACTER_ARCHETYPES = ["Héros", "Allié", "Mentor", "Trickster", "Antagoniste"];
+
+const STRUCTURE_COMPACT = [
+  "Acte 1: Monde ordinaire, appel, refus, mentor, franchissement du seuil.",
+  "Acte 2: Épreuves/alliés/ennemis, approche, ordalie, récompense, chemin du retour.",
+  "Acte 3: Résurrection, retour avec l'élixir.",
 ];
 
-const BASE_NAMES = [
-  "Camille",
-  "Emilie",
-  "Nicolas",
-  "Marina",
-  "Isabelle",
-  "Aurelie",
-  "Raphael",
-  "Matheo",
-  "Oceane",
-  "Adrian",
+const BEST_PRACTICES_COMPACT = [
+  "Structure = outil de diagnostic, pas formule rigide.",
+  "Priorité à la transformation interne du héros.",
+  "Chaque étape produit un basculement émotionnel.",
+  "Ordalie forte (perte/peur/crise identitaire).",
+  "Enjeux croissants jusqu'à la résurrection.",
+  "Miroir entre conflit externe et conflit interne.",
+  "Rôles clairs: qui pousse, qui teste, qui guide.",
+  "Retour final utile: l'élixir doit servir aux autres.",
+  "Compression possible des étapes sans casser l'arc.",
+  "Le lecteur doit ressentir peur, soulagement et fermeture.",
 ];
 
+const BASE_NAMES = ["Camille", "Émilie", "Nicolas", "Marina", "Isabelle", "Aurélie", "Raphaël", "Mathéo", "Océane", "Adrian"];
 const vowels = "aeiouy";
 
 function pickRandom(list) {
@@ -203,7 +182,6 @@ function normalizeNameToCVCVCV(name) {
   const letters = name.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   let out = "";
   let needsVowel = false;
-
   for (const char of letters) {
     if (!/[a-z]/.test(char)) continue;
     const isVowel = vowels.includes(char);
@@ -216,7 +194,6 @@ function normalizeNameToCVCVCV(name) {
     }
     if (out.length === 6) break;
   }
-
   const fillConsonants = "trnslmdpc";
   const fillVowels = "aeiou";
   while (out.length < 6) {
@@ -226,52 +203,101 @@ function normalizeNameToCVCVCV(name) {
   return out.slice(0, 6).replace(/^./, (m) => m.toUpperCase());
 }
 
-function makeCharacterNames() {
+function generateSuggestedNames() {
   const shuffled = [...BASE_NAMES].sort(() => Math.random() - 0.5);
-  return {
-    heroName: normalizeNameToCVCVCV(shuffled[0]),
-    allyName: normalizeNameToCVCVCV(shuffled[1]),
-    mentorName: normalizeNameToCVCVCV(shuffled[2]),
-  };
+  return CHARACTER_ARCHETYPES.map((archetype, idx) => ({
+    archetype,
+    name: normalizeNameToCVCVCV(shuffled[idx % shuffled.length]),
+  }));
 }
 
-function buildFields(container, state) {
+function buildSelectField(field, state) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "field";
+  const label = document.createElement("label");
+  label.setAttribute("for", field.id);
+  label.textContent = field.label;
+  const select = document.createElement("select");
+  select.id = field.id;
+  select.name = field.id;
+  field.options.forEach((option, idx) => {
+    const opt = document.createElement("option");
+    opt.value = option.label;
+    opt.textContent = option.label;
+    if (state[field.id] === option.label || (!state[field.id] && idx === 0)) opt.selected = true;
+    select.appendChild(opt);
+  });
+  const hint = document.createElement("p");
+  hint.className = "hint";
+  hint.id = `${field.id}-hint`;
+  hint.textContent = (field.options.find((o) => o.label === select.value) || field.options[0]).explain;
+  select.addEventListener("change", () => {
+    const current = field.options.find((o) => o.label === select.value);
+    hint.textContent = current ? current.explain : "";
+  });
+  wrapper.append(label, select, hint);
+  return wrapper;
+}
+
+function buildTextField(field, state) {
+  const wrapper = document.createElement("div");
+  wrapper.className = "field";
+  wrapper.style.gridColumn = "1 / -1";
+  const label = document.createElement("label");
+  label.setAttribute("for", field.id);
+  label.textContent = field.label;
+  const textarea = document.createElement("textarea");
+  textarea.id = field.id;
+  textarea.name = field.id;
+  textarea.rows = 4;
+  textarea.placeholder = field.placeholder;
+  textarea.value = state[field.id] || "";
+  const hint = document.createElement("p");
+  hint.className = "hint";
+  hint.textContent = "Tu peux écrire plusieurs lignes. Sois simple et précis.";
+  wrapper.append(label, textarea, hint);
+  return wrapper;
+}
+
+function buildSectionFields(container, group, state) {
   container.innerHTML = "";
-  FIELD_CONFIG.forEach((field) => {
-    const wrapper = document.createElement("div");
-    wrapper.className = "field";
+  FIELD_CONFIG.filter((field) => field.group === group).forEach((field) => {
+    container.appendChild(buildSelectField(field, state));
+  });
+}
 
-    const label = document.createElement("label");
-    label.setAttribute("for", field.id);
-    label.textContent = field.label;
+function buildTasteFields(container, state) {
+  TASTE_FIELDS.forEach((field) => container.appendChild(buildTextField(field, state)));
+}
 
-    const select = document.createElement("select");
-    select.id = field.id;
-    select.name = field.id;
+function buildCharacterEditor(container, characters) {
+  container.innerHTML = "";
+  const title = document.createElement("p");
+  title.className = "characters-title";
+  title.textContent = "Noms suggérés (modifiables) :";
+  container.appendChild(title);
+  characters.forEach((char, idx) => {
+    const row = document.createElement("div");
+    row.className = "character-row";
 
-    field.options.forEach((option, idx) => {
+    const archetypeSelect = document.createElement("select");
+    archetypeSelect.name = `charArchetype${idx}`;
+    CHARACTER_ARCHETYPES.forEach((a) => {
       const opt = document.createElement("option");
-      opt.value = option.label;
-      opt.textContent = option.label;
-      if (state[field.id] === option.label || (!state[field.id] && idx === 0)) {
-        opt.selected = true;
-      }
-      select.appendChild(opt);
+      opt.value = a;
+      opt.textContent = a;
+      if (a === char.archetype) opt.selected = true;
+      archetypeSelect.appendChild(opt);
     });
 
-    const hint = document.createElement("p");
-    hint.className = "hint";
-    hint.id = `${field.id}-hint`;
-    const selected = field.options.find((o) => o.label === select.value) || field.options[0];
-    hint.textContent = selected.explain;
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.name = `charName${idx}`;
+    nameInput.value = char.name;
+    nameInput.placeholder = "Nom du personnage";
 
-    select.addEventListener("change", () => {
-      const current = field.options.find((o) => o.label === select.value);
-      hint.textContent = current ? current.explain : "";
-    });
-
-    wrapper.append(label, select, hint);
-    container.appendChild(wrapper);
+    row.append(archetypeSelect, nameInput);
+    container.appendChild(row);
   });
 }
 
@@ -279,6 +305,9 @@ function randomSelections() {
   const state = {};
   FIELD_CONFIG.forEach((field) => {
     state[field.id] = pickRandom(field.options).label;
+  });
+  TASTE_FIELDS.forEach((field) => {
+    state[field.id] = "";
   });
   return state;
 }
@@ -288,41 +317,64 @@ function currentSelections(form) {
   FIELD_CONFIG.forEach((field) => {
     data[field.id] = form.elements[field.id].value;
   });
+  TASTE_FIELDS.forEach((field) => {
+    data[field.id] = form.elements[field.id].value.trim();
+  });
   return data;
 }
 
-function buildPrompt(selections, names) {
+function currentCharacters(editor) {
+  const rows = editor.querySelectorAll(".character-row");
+  return [...rows].map((row) => ({
+    archetype: row.querySelector("select").value,
+    name: row.querySelector("input").value.trim(),
+  }));
+}
+
+function buildPrompt(selections, characters) {
   const selectedLines = FIELD_CONFIG.map((field) => {
     const choice = field.options.find((opt) => opt.label === selections[field.id]);
     return `- ${field.label}: ${selections[field.id]} (${choice ? choice.explain : ""})`;
   }).join("\n");
 
+  const tasteLines = [
+    `- Ce que j'aimerais: ${selections.ceQueJaimerais || "Aucune préférence précisée."}`,
+    `- Ce que je veux éviter: ${selections.ceQueJeVeuxEviter || "Aucun évitement précisé."}`,
+  ].join("\n");
+
+  const characterLines = characters
+    .map((c) => `- ${c.archetype}: ${c.name || "Nom à inventer (forme simple CVCVCV)"}`)
+    .join("\n");
+
   return [
-    "Tu es un auteur jeunesse expert. Ecris en francais uniquement.",
-    "Objectif: creer une histoire pour enfant primaire, imaginative, non repetitive et jamais ridicule.",
+    "Tu es un auteur jeunesse expert. Écris en français uniquement.",
+    "Objectif: créer une histoire enfant (primaire) imaginative, non répétitive et jamais ridicule.",
     "",
-    "Parametres choisis:",
+    "Paramètres choisis:",
     selectedLines,
     "",
-    "Noms des personnages (formes simples CVCVCV):",
-    `- Heros: ${names.heroName}`,
-    `- Allie: ${names.allyName}`,
-    `- Mentor: ${names.mentorName}`,
+    "Goûts de l'enfant:",
+    tasteLines,
     "",
-    "Structure narrative obligatoire (Christopher Vogler, 3 actes / 12 etapes):",
-    ...VOGler_STRUCTURE.map((item) => `- ${item}`),
+    "Personnages (archétype + nom):",
+    characterLines,
     "",
-    "Checklist qualitative obligatoire (10 bonnes pratiques):",
-    ...BEST_PRACTICES.map((item) => `- ${item}`),
+    "Structure imposée (compacte):",
+    ...STRUCTURE_COMPACT.map((item) => `- ${item}`),
+    "",
+    "Bonnes pratiques imposées (compactes):",
+    ...BEST_PRACTICES_COMPACT.map((item) => `- ${item}`),
+    "",
+    "À supprimer (ne pas ajouter):",
+    "- Intro interdite: ouverture, préambule, accroche, reformulation de la demande.",
+    "- Outro interdite: conclusion méta, post-scriptum, résumé explicatif, justification.",
     "",
     "Consignes de sortie:",
-    "- Donne un titre marquant.",
-    "- Redige l'histoire complete en sections claires (Acte 1, Acte 2, Acte 3).",
-    "- Fais sentir les emotions (peur, soulagement, fermeture positive).",
-    "- Respecte une longueur cible proche du nombre de mots demande.",
-    "- Adapte le vocabulaire et la complexite a l'age choisi.",
-    "- Evite les redites et les formulations absurdes.",
-    "- Termine avec une morale douce liee au theme choisi et au ton de fin.",
+    "- Donne uniquement l'histoire finale (pas d'explication de méthode).",
+    "- Découpe clairement en Acte 1, Acte 2, Acte 3.",
+    "- Respecte une longueur proche du nombre de mots demandé.",
+    "- Fais monter les enjeux jusqu'à l'ordalie et la résurrection.",
+    "- Termine sur le ton de fin choisi, avec un élixir utile.",
   ].join("\n");
 }
 
@@ -341,53 +393,65 @@ function readState() {
 }
 
 function setStatus(text) {
-  const status = document.getElementById("status");
-  status.textContent = text;
+  document.getElementById("status").textContent = text;
 }
 
 function applyRandomButtonGradients() {
-  const buttons = document.querySelectorAll(".btn");
-  buttons.forEach((button) => {
+  document.querySelectorAll(".btn").forEach((button) => {
     button.style.backgroundImage = `linear-gradient(${randomGradientDirection()}, var(--grad-a), var(--grad-b), var(--grad-c))`;
   });
 }
 
 function init() {
   const form = document.getElementById("story-form");
-  const fields = document.getElementById("fields");
   const output = document.getElementById("prompt-output");
   const copyBtn = document.getElementById("copy-btn");
+  const preferencesFields = document.getElementById("preferences-fields");
+  const setupFields = document.getElementById("setup-fields");
+  const charactersFields = document.getElementById("characters-fields");
+  const charactersEditor = document.getElementById("characters-editor");
 
-  const randomState = randomSelections();
-  buildFields(fields, randomState);
+  const state = randomSelections();
+  const names = generateSuggestedNames();
+
+  buildSectionFields(preferencesFields, "preferences", state);
+  buildTasteFields(preferencesFields, state);
+  buildSectionFields(setupFields, "setup", state);
+  buildSectionFields(charactersFields, "characters", state);
+  buildCharacterEditor(charactersEditor, names);
 
   const previous = readState();
   if (previous && previous.prompt) {
     output.value = previous.prompt;
+    TASTE_FIELDS.forEach((field) => {
+      if (previous.selections?.[field.id] && form.elements[field.id]) {
+        form.elements[field.id].value = previous.selections[field.id];
+      }
+    });
   }
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const selections = currentSelections(form);
-    const names = makeCharacterNames();
-    const prompt = buildPrompt(selections, names);
+    const characters = currentCharacters(charactersEditor);
+    const prompt = buildPrompt(selections, characters);
     output.value = prompt;
-    persist({ selections, prompt, names, updatedAt: Date.now() });
-    setStatus("Prompt genere. Tu peux le copier.");
+    persist({ selections, characters, prompt, updatedAt: Date.now() });
+    setStatus("Prompt généré. Tu peux le copier.");
   });
 
   copyBtn.addEventListener("click", async () => {
     if (!output.value.trim()) {
-      setStatus("Genere d'abord un prompt.");
+      setStatus("Génère d'abord un prompt.");
       return;
     }
     try {
       await navigator.clipboard.writeText(output.value);
-      setStatus("Prompt copie dans le presse-papiers.");
+      setStatus("Prompt copié dans le presse-papiers.");
     } catch {
       output.select();
       document.execCommand("copy");
-      setStatus("Prompt copie.");
+      setStatus("Prompt copié.");
     }
   });
 
